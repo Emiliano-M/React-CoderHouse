@@ -1,4 +1,5 @@
 import ItemCount from "./ItemCount.js";
+import ItemDetail from "./ItemDetailContainer.js";
 import ItemList from "./ItemList.js";
 
 const ItemListContainer = (props) => 
@@ -13,6 +14,8 @@ const ItemListContainer = (props) =>
             <ItemCount stock={5} initial={1} onAdd={onAdd}/> */}
             
             <ItemList/>
+            <ItemDetail/>
+            
         </div>
     )
 
