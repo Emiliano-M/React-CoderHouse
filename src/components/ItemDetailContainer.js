@@ -1,18 +1,21 @@
-import Detail from "./ItemDetail";
+import Detail from "./ItemDetail/ItemDetail";
 import { getOneProduct } from "../Products";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-const ItemDetail = () => 
+const ItemDetailContainer = () => 
 {   
     const [product, setProduct] = useState({})
+    const {id} = useParams()
 
     useEffect( () => {     
-        getOneProduct(1).then((Products) => 
+        getOneProduct(id).then((Products) => 
             {
                 setProduct(Products);
             })
-    },[]) 
+    },[id]) 
 
+    
     return(
         <div>
             {  
@@ -22,4 +25,4 @@ const ItemDetail = () =>
     )
 }
 
-export default ItemDetail;
+export default ItemDetailContainer;

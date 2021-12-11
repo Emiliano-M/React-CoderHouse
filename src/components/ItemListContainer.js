@@ -1,24 +1,28 @@
-import ItemCount from "./ItemCount.js";
-import ItemDetail from "./ItemDetailContainer.js";
-import ItemList from "./ItemList.js";
+import Item from "./Item/Item";
+import { getProduct } from "../Products";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-const ItemListContainer = (props) => 
-{
 
-    const onAdd = (props) => {
-        alert("Cart Updated!");
-    }
-    return (
+const ItemListContainer = () => 
+{   
+    const [product, setProduct] = useState([])
+    const {categoryId} = useParams()
+
+    useEffect(() => {     
+        getProduct(categoryId).then(Products => 
+            {
+                setProduct(Products);
+            })
+    },[categoryId]) 
+    
+    return(
         <div>
-            {/* <p> {props.itemList} </p>
-            <ItemCount stock={5} initial={1} onAdd={onAdd}/> */}
-            
-            <ItemList/>
-            <ItemDetail/>
-            
+            {  
+                product.map((e,i) => <Item Data={e} key={i}/>)
+            }
         </div>
     )
-
 }
 
-export default ItemListContainer;
+export default ItemListContainer 
