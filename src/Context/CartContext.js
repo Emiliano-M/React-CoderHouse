@@ -21,7 +21,7 @@ export const CartContextProvider = ({children}) => {
             Productos[index].totalprice = Productos[index].price * Productos[index].quantity
         }
 
-        if(index < 0)
+        if(index < 0) 
         {
             let Temp = {
                 name: item.name,
