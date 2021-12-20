@@ -1,5 +1,5 @@
 import Cart from "./CartWidget"
-import { getCategories } from "../Products"
+import { getCategories } from "../../Products"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 

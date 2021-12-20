@@ -20,6 +20,9 @@ const ItemCount = (props) => {
         }
     }
 
+    const onAdd = () => {
+        props.onAdd(count)
+    }
     return (
 
         <div>
@@ -29,7 +32,7 @@ const ItemCount = (props) => {
                 <button onClick={handleClickp} type="button" className="btn btn-secondary"> + </button>      
             </div>
 
-            <button onClick={props.stock > 0 && (() => props.onAdd(count))} type="button" className="btn btn-secondary btn-lg"> Agregar </button>
+            <button onClick={onAdd} type="button" className="btn btn-secondary btn-lg"> Agregar </button>
                      
         </div>
         

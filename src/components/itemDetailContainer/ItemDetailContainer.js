@@ -1,5 +1,5 @@
 import Detail from "./ItemDetail/ItemDetail";
-import { getOneProduct } from "../Products";
+import { getOneProduct } from "../../Products";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 

@@ -1,5 +1,5 @@
 import Item from "./Item/Item";
-import { getProduct } from "../Products";
+import { getProduct } from "../../Products";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 

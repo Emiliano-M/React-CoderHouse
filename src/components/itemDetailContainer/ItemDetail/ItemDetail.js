@@ -1,15 +1,18 @@
 import "./ItemDetail.css"
 import ItemCount from "../ItemCount";
-import React, {useState} from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from "react-router-dom";
+import CartContext from "../../CartContainer/CartContext";
 
 const Detail = ({Data}) =>
 {
     const [itemCountFlag, setTemp] = useState(0)
+    const { addItem} = useContext(CartContext)
 
     const onAdd = (value) => {
         alert("Cart Updated!");
         setTemp(value);
+        addItem(Data, value);
     }
 
     return(
@@ -22,7 +25,7 @@ const Detail = ({Data}) =>
                     <p className="card-text mx-2 h5">Colores: {Data.color}</p>
                     <div className="">
                         <h3>${Data.price}</h3>
-                        {itemCountFlag == 0 && (<ItemCount initial={1} stock={10} onAdd={onAdd}/>)}
+                        {itemCountFlag === 0 && (<ItemCount initial={1} stock={10} onAdd={onAdd}/>)}
                         <Link className="btn btn-secondary btn-lg" to="/cart"> Terminar Compra </Link>
                     </div>
                 </div>

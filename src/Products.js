@@ -8,7 +8,8 @@ const Product =
         id: 1,
         size: "S/M",
         color:"Negro",
-        descrip:""
+        descrip:"",
+        stock: 7
     },
 
     {  
@@ -19,7 +20,9 @@ const Product =
         id: 2,
         size: "S/M",
         color:"Negro",
-        descrip:""
+        descrip:"",
+        stock: 10
+        
     },
 
     {  
@@ -30,18 +33,20 @@ const Product =
         id: 3,
         size: "S/M",
         color:"Blanco",
-        descrip:""
+        descrip:"",
+        stock: 9
     },
 
     {  
         name: "Zapatillas Runfalcon Adidas",
-        price: 4000,
+        price: 14000,
         category: "Zapatillas",
         img:"https://assets.adidas.com/images/w_600,f_auto,q_auto/05a81c6269db4ac0a5c0a9ae01650845_9366/Zapatillas_Runfalcon_Negro_G28970.jpg",
         id: 4,
-        size: "S/M",
+        size: "38-43",
         color:"Negro",
-        descrip:""
+        descrip:"",
+        stock: 6
     },
 
     {  
@@ -49,10 +54,11 @@ const Product =
         price: 8000,
         category: "Torso",
         img:"https://www.dexter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwa9a78545/products/NI_BV2648-010/NI_BV2648-010-1.JPG",
-        id: 4,
+        id: 5,
         size: "S/M/X",
         color:"Negro",
-        descrip:""
+        descrip:"",
+        stock: 8
     }
 ]
 
