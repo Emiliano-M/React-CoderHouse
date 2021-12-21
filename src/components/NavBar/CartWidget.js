@@ -7,9 +7,13 @@ const Cart = () => {
     const {totalProductos} = useContext(CartContext)
 
 
-    return (
+    return totalProductos !== 0 ?(
+        
         <Link className="btn btn-light" to="/cart"> <img src="../img/cart.svg" className="img-fluid" alt= "Carro de compras"/> {totalProductos} </Link>
-    )
+    ) : 
+    (<div>
+
+    </div>)
 
 
 }

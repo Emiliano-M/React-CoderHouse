@@ -26,7 +26,7 @@ const Detail = ({Data}) =>
                     <div className="">
                         <h3>${Data.price}</h3>
                         {itemCountFlag === 0 && (<ItemCount initial={1} stock={10} onAdd={onAdd}/>)}
-                        <Link className="btn btn-secondary btn-lg" to="/cart"> Terminar Compra </Link>
+                        <Link className="btn btn-secondary btn-lg mt-3" to="/cart"> Terminar Compra </Link>
                     </div>
                 </div>
         </div>

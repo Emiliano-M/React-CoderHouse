@@ -43,18 +43,20 @@ export const CartContextProvider = ({children}) => {
 
     const removeItem = (itemId) => {
 
-        setProductos(Productos.filter(element => element.id !== itemId))
-
         setTotal(totalProductos - (Productos.find(element => element.id === itemId)).quantity)
         setCoste(costeTotal - (Productos.find(element => element.id === itemId)).price)
+
+        setProductos(Productos.filter(element => element.id !== itemId))
 
         console.log(Productos, "REMOVED")
     }
 
     const clear = () => {
+
         setProductos([])
         setTotal(0)
         setCoste(0)
+        
     }
    
     return (

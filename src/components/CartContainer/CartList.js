@@ -12,7 +12,7 @@ const CartList = () => {
 
         <div>
             {Productos.map((e,i) => <CartItem Data={e} key={i}/>)}
-            <div className="card bg-dark w-100 d-inline-block product mt-5 itemDetail">              
+            <div className="card bg-dark w-100 d-inline-block product mt-5">              
                 <div className="card-body"> 
                     <p className="card-text mx-2 h5">Total: {costeTotal}</p>
                 </div>
