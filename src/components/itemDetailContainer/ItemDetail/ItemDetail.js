@@ -7,7 +7,7 @@ import CartContext from "../../../Context/CartContext";
 const Detail = ({Data}) =>
 {
     const [itemCountFlag, setTemp] = useState(0)
-    const { addItem} = useContext(CartContext)
+    const { addItem } = useContext(CartContext)
 
     const onAdd = (value) => {
         alert("Cart Updated!");
@@ -25,7 +25,7 @@ const Detail = ({Data}) =>
                     <p className="card-text mx-2 h5">Colores: {Data.color}</p>
                     <div className="">
                         <h3>${Data.price}</h3>
-                        {itemCountFlag === 0 && (<ItemCount initial={1} stock={10} onAdd={onAdd}/>)}
+                        {itemCountFlag === 0 && (<ItemCount initial={1} stock={Data.stock} onAdd={onAdd}/>)}
                         <Link className="btn btn-secondary btn-lg mt-3" to="/cart"> Terminar Compra </Link>
                     </div>
                 </div>
