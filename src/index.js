@@ -3,10 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { collection, addDoc } from "firebase/firestore"
-import {db} from "./service/firebase/firebase"
-
-const ref = collection(db, "items")
 
 ReactDOM.render(
   <App />,

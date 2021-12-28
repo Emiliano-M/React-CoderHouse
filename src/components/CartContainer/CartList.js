@@ -6,8 +6,6 @@ const CartList = () => {
 
     const {Productos, costeTotal} = useContext(CartContext)
 
-    console.log(costeTotal)
-
     return (
 
         <div>
