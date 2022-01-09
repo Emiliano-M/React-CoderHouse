@@ -2,14 +2,16 @@ import { initializeApp } from "firebase/app"
 import { getFirestore } from "firebase/firestore"
 
 const firebaseConfig = {
-    apiKey: "AIzaSyD7XxEOXialhW78saY8ObA_2lIq9LUoihY",
-    authDomain: "costume-shop-ac23f.firebaseapp.com",
-    projectId: "costume-shop-ac23f",
-    storageBucket: "costume-shop-ac23f.appspot.com",
-    messagingSenderId: "315707110012",
-    appId: "1:315707110012:web:dbb9088d63d1b6ed1b8ff9",
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGIN_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID,
   };
 
+  console.log(process.env.REACT_APP_API_KEY)
+  
   const app = initializeApp(firebaseConfig)
 
  export const db = getFirestore(app)
