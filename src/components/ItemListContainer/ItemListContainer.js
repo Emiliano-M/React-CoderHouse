@@ -1,8 +1,7 @@
 import Item from "./Item/Item";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { collection, getDocs, query, where} from "firebase/firestore"
-import { db } from "../../service/firebase/firebase";
+import { getProducts } from "../../service/firebase/firebase";
 
 
 const ItemListContainer = () => 
@@ -12,31 +11,16 @@ const ItemListContainer = () =>
     const {categoryId} = useParams()
 
     useEffect(() => {
-        if(!categoryId){
-            setLoading(true)
-            getDocs(collection(db, "items")).then((querySnapshot) => {
-                const products = querySnapshot.docs.map (doc => {
-                    return{ id: doc.id, ...doc.data()}
-                })
-                setProduct(products)
-            }).catch((error) => {
-                console.log("Error searching: ", error)
-            }).finally(() => {
-                setLoading(false)
-            })
-        } else {
-            setLoading(true)
-            getDocs(query(collection(db, "items"), where("category", "==", categoryId))).then((querySnapshot) => {
-                const products = querySnapshot.docs.map (doc => {
-                    return{ id: doc.id, ...doc.data()}
-                })
-                setProduct(products)
-            }).catch((error) => {
-                console.log("Error searching: ", error)
-            }).finally(() => {
-                setLoading(false)
-            })
-        }
+        setLoading(true)
+        
+        getProducts("category", "==", categoryId).then(products => {
+            setProduct(products)
+        }).catch(error => {
+            console.log(error)
+        }).finally(() => {
+            setLoading(false)
+        })
+
     }, [categoryId])
 
     if(loading){
@@ -48,12 +32,18 @@ const ItemListContainer = () =>
     }
     
     return(
-        <div>
+        <div className="row">
+            <div className="col-2"/>
+
+            <div className="col" style={{marginInline: "150px"}}>
             {  
                 product.map((e,i) => <Item Data={e} key={i}/>)
             }
+            </div>
+
+            <div className="col-2"/>
         </div>
     )
 }
 
-export default ItemListContainer 
+export default ItemListContainer

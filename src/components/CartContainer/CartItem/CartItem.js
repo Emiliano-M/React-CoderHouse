@@ -13,7 +13,7 @@ const CartItem = (props) =>
     return(
         <div>
             <div className="card bg-dark w-50 d-inline-block product mt-3">
-                <img src={props.Data.img} className="card-img-top img " alt="Producto De Ropa"/>
+                <img src={props.Data.img} className="card-img-top img " alt={props.Data.name}/>
                 <div className="card-body">
                     <h5 className="card-title">{props.Data.name} x {props.Data.quantity}</h5>
                     <div> 

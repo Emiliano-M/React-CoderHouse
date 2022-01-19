@@ -1,8 +1,7 @@
 import Detail from "./ItemDetail/ItemDetail";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getDoc, doc} from "firebase/firestore"
-import { db } from "../../service/firebase/firebase";
+import { getProduct } from "../../service/firebase/firebase";
 
 const ItemDetailContainer = () => 
 {   
@@ -12,11 +11,11 @@ const ItemDetailContainer = () =>
 
     useEffect(() => {
         setLoading(true)
-        getDoc(doc(db, "items", id)).then((QuerySnapshot) => {
-            const product = {id: QuerySnapshot.id, ...QuerySnapshot.data()}
+        
+        getProduct(id).then(product => {
             setProduct(product)
         }).catch((error) => {
-            console.log("Error serching: ", error)
+            console.log(error)
         }).finally(() => {
             setLoading(false)
         })

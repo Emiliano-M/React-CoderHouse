@@ -4,15 +4,15 @@ import CartContext from '../../Context/CartContext';
 
 const CartList = () => {
 
-    const {Productos, costeTotal} = useContext(CartContext)
+    const {Products, all} = useContext(CartContext)
 
     return (
 
         <div>
-            {Productos.map((e,i) => <CartItem Data={e} key={i}/>)}
+            {Products.map((e,i) => <CartItem Data={e} key={i}/>)}
             <div className="card bg-dark w-100 d-inline-block product mt-5">              
                 <div className="card-body"> 
-                    <p className="card-text mx-2 h5">Total: {costeTotal}</p>
+                    <p className="card-text mx-2 h5">Total: {all().price}</p>
                 </div>
             </div>
         </div>

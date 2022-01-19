@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { db } from '../../service/firebase/firebase'
-import { collection, getDocs} from "firebase/firestore"
+import { getTickets } from '../../service/firebase/firebase'
 import Ticket from './Ticket'
+import { Link } from 'react-router-dom'
 
 const DashBoard = () => {
 
@@ -11,13 +11,11 @@ const DashBoard = () => {
     useEffect(() => {
         
         setLoading(true)
-        getDocs(collection(db, "forms")).then((querySnapshot) => {
-            const tickets = querySnapshot.docs.map(doc => {
-                return{ id: doc.id, ...doc.data()}
-            })
+
+        getTickets().then(tickets => {
             setTickets(tickets)
-        }).catch((error) => {
-            console.log("Error searching: ", error)
+        }).catch(error => {
+            console.log(error)
         }).finally(() => {
             setLoading(false)
         })
@@ -33,11 +31,23 @@ const DashBoard = () => {
         )
     }
     
-    return(
+    return Tickets.length !== 0 ?(
+        <div className='row'>
+            <div className='col-3'/>
+
+            <div className='col'>
+                {  
+                    Tickets.map((e,i) => <Ticket Data={e} key={i}/>)
+                }
+            </div>
+
+            <div className='col-3'/>
+        </div>
+    ) :
+    (
         <div>
-            {  
-                Tickets.map((e,i) => <Ticket Data={e} key={i}/>)
-            }
+            <p className="h5">No Hay Ningun Ticket De Compra!</p>
+            <Link className="btn btn-secondary btn-lg mt-3" to="/"> Home </Link>
         </div>
     )
 }

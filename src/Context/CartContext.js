@@ -4,21 +4,16 @@ const CartContext = React.createContext();
 
 export const CartContextProvider = ({children}) => {
 
-    const [Productos, setProductos] = useState([])
-    const [totalProductos, setTotal] = useState(0)
-    const [costeTotal, setCoste] = useState(0)
+    const [Products, setProducts] = useState([])
 
     const addItem = (item, quantity) => {
-
-        setTotal(totalProductos + quantity)
-        setCoste(costeTotal + (item.price * quantity))
 
         let index = isInCart(item.id)
 
         if(index >= 0)
         {
-            Productos[index].quantity = Productos[index].quantity + quantity
-            Productos[index].totalprice = Productos[index].price * Productos[index].quantity
+            Products[index].quantity = Products[index].quantity + quantity
+            Products[index].totalprice = Products[index].price * Products[index].quantity
         }
 
         if(index < 0) 
@@ -31,36 +26,42 @@ export const CartContextProvider = ({children}) => {
                 quantity: quantity
             }
 
-            setProductos([...Productos, Temp])
+            setProducts([...Products, Temp])
         }
  
     }
 
     const isInCart = (id) => {
 
-        return Productos.findIndex(element => element.id === id);
+        return Products.findIndex(element => element.id === id);
     }
 
     const removeItem = (itemId) => {
 
-        setTotal(totalProductos - (Productos.find(element => element.id === itemId)).quantity)
-        setCoste(costeTotal - (Productos.find(element => element.id === itemId)).price)
+        setProducts(Products.filter(element => element.id !== itemId))
 
-        setProductos(Productos.filter(element => element.id !== itemId))
+    }
 
-        console.log(Productos, "REMOVED")
+    const all = () => {
+
+        var all = {price: 0, quantity: 0}
+
+        Products.forEach( Product => {
+            all.price = all.price + Product.price * Product.quantity
+            all.quantity = all.quantity + Product.quantity
+        })
+        
+        return all;
     }
 
     const clear = () => {
 
-        setProductos([])
-        setTotal(0)
-        setCoste(0)
+        setProducts([])
         
     }
    
     return (
-        <CartContext.Provider value={{addItem, removeItem, clear, Productos, totalProductos, costeTotal}}>
+        <CartContext.Provider value={{addItem, removeItem, clear, all, Products}}>
             {children}
         </CartContext.Provider>
     )

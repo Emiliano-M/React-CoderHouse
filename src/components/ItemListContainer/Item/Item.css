@@ -1,10 +1,15 @@
-.product{
-    max-height: fit-content;
-    max-width: 200px;
-    margin-inline: 8px;
+.producto{
+    max-height: 600px;
+    max-width: 250px;
+    background-color: #A6A6A6;
+    margin-inline: 20px;
   }
 
 .img{
-  height: 200px;
-  width: 200px;
+  max-height: 250px;
+  max-width: 200px;
+}
+
+.boton {
+  background-color: #735340;
 }

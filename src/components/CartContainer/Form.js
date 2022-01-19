@@ -9,15 +9,15 @@ const Form = () => {
     const [Name, setName] = useState("")
     const [Email, setEmail] = useState("")
     const [Phone, setPhone] = useState("")
-    const [Id, setId] = useState("")
+
     const navigate = useNavigate()
 
-    const {clear, costeTotal, Productos} = useContext(CartContext)
+    const {clear, all, Products} = useContext(CartContext)
 
     const formSubmit = (event) => {
 
         event.preventDefault()
-        setId("")
+        
 
         if( Name.length !== 0 && Email.length !== 0 && Phone > 0 ) {
 
@@ -28,21 +28,20 @@ const Form = () => {
                 phone : Phone,
                 },
 
-                items : Productos,
+                items : Products,
 
                 date : Timestamp.fromDate(new Date()),
 
-                total : costeTotal
+                total : all().price
 
             }
 
-            addDoc(collection(db, "forms"), data).then( (id) => {
-                setId(id);
-            }).catch( (error) => {
+            addDoc(collection(db, "forms"), data).catch( (error) => {
                 console.log("Error subiendo form: ", error)
             })
 
             navigate("/dashboard")
+            clear()
 
         }
 
@@ -51,9 +50,7 @@ const Form = () => {
         }
     }
 
-    console.log( Name, " ", Email, " ", Phone)
-
-    return costeTotal !== 0 ? (
+    return all().price !== 0 ? (
         <div className='container'>
             <form>
 
@@ -81,7 +78,7 @@ const Form = () => {
     : 
     (
         <div>
-            <p className="h5">Agregue Un Producto Al Carrito y Aparecera Aqui</p>
+            <p className="h5">Finalice Su Compra y Aqui Podra Completarla</p>
             <Link className="btn btn-secondary btn-lg mt-3" to="/"> Home </Link>
         </div>
     )

@@ -10,13 +10,12 @@ const Detail = ({Data}) =>
     const { addItem } = useContext(CartContext)
 
     const onAdd = (value) => {
-        alert("Cart Updated!");
         setTemp(value);
         addItem(Data, value);
     }
 
     return(
-        <div className="card bg-dark w-100 d-inline-block product mt-5 itemDetail">
+        <div className="d-inline-block product mt-5 itemDetail detalle">
             <img src={Data.img} className="DetailImg" alt="Producto De Ropa"/>
                 <div className="card-body">
                     <p className="card-title h3">{Data.name}</p>
