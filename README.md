@@ -63,4 +63,4 @@ items:
 * name: "productname"
 * price: number
 * size: "size"
-* stock number
+* stock: number
