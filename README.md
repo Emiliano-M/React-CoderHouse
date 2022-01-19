@@ -50,12 +50,17 @@ file and your firebase data should have the automatic id generator.
 
 All the documents of categories and items are objects this is what they should look like:
 
-* categories: name: "categoryname"
-* items: category: "categoryname"
-         color: "colorname"
-         descrip: "a description"
-         img: "img url"
-         name: "productname"
-         price: number
-         size: "size"
-         stock number
+categories 
+
+* name: "categoryname"
+
+items: 
+
+* category: "categoryname"
+* color: "colorname"
+* descrip: "a description"
+* img: "img url"
+* name: "productname"
+* price: number
+* size: "size"
+* stock number
