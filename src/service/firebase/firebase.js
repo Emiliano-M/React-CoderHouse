@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app"
-import { getDocs, getDoc, doc, collection, query, where, getFirestore} from "firebase/firestore"
+import { getDocs, getDoc, doc, addDoc, collection, query, where, writeBatch, getFirestore} from "firebase/firestore"
+
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -33,11 +34,11 @@ export const getProducts = (key, operator, value) => {
 
 }
 
-export const getProduct = (item) => {
+export const getProduct = (id) => {
 
   return new Promise ((resolve, reject) => {
 
-    getDoc(doc(db, "items", item)).then((QuerySnapshot) => {
+    getDoc(doc(db, "items", id)).then((QuerySnapshot) => {
       const product = {id: QuerySnapshot.id, ...QuerySnapshot.data()}
       resolve(product)
     }).catch((error) => {
@@ -78,4 +79,59 @@ export const getTickets = () => {
     })
 
   })
+}
+
+export const postTicket = (data) => {
+  return new Promise ((resolve, reject) => {
+
+    addDoc(collection(db, "forms"), data).catch( (error) => {
+      reject("Error subiendo form: ", error)
+    })
+
+    resolve(true)
+  })
+  
+
+}
+
+export const StockCheck = (Products) => {
+  let flag = true
+
+  const batch = writeBatch(db)
+
+  Products.forEach(item => {
+
+    getDoc(doc(db, "items", item.id)).then((QuerySnapshot) => {
+      
+      if(QuerySnapshot.data().stock >= item.quantity)
+      {
+        batch.update(doc(db,"items", QuerySnapshot.id), {"stock": QuerySnapshot.data().stock - item.quantity})
+      } 
+      else 
+      {
+        flag = false
+      }
+
+    }).catch((error) => {
+        console.log("Error obteniendo el producto: ", error)
+    })
+
+  })
+
+  return {flag, batch};
+}
+
+export const commitHandler = (stockChecked) => {
+
+  console.log("COMMIT: ", stockChecked)
+  
+  if(stockChecked.flag)
+  {
+    stockChecked.batch.commit()
+    return true;
+  }
+  else
+  {
+    return false;
+  }
 }

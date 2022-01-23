@@ -1,14 +1,15 @@
 import React, { useState, useContext,  } from "react";
 import CartContext from "../../Context/CartContext";
 import { Link, useNavigate } from 'react-router-dom';
-import { db } from "../../service/firebase/firebase"
-import { addDoc ,collection, Timestamp } from "firebase/firestore"
+import { commitHandler, postTicket, StockCheck } from "../../service/firebase/firebase"
+import { Timestamp } from "firebase/firestore"
 
 const Form = () => {
 
     const [Name, setName] = useState("")
     const [Email, setEmail] = useState("")
     const [Phone, setPhone] = useState("")
+    //const [StockFlag, setStockFlag] = useState(false);
 
     const navigate = useNavigate()
 
@@ -36,10 +37,17 @@ const Form = () => {
 
             }
 
-            addDoc(collection(db, "forms"), data).catch( (error) => {
-                console.log("Error subiendo form: ", error)
-            })
+            let Stock = StockCheck(data.items)
 
+            console.log("STOCK: ", Stock)
+            if(commitHandler(Stock))
+            {
+               postTicket(data) 
+            }
+            else
+            {
+                alert("NO HAY STOCK DE SUS PRODUCTOS")
+            }
             navigate("/dashboard")
             clear()
 
@@ -70,7 +78,7 @@ const Form = () => {
                 </div>
       
                 <div id="emailHelp" className="form-text mb-3">Nunca compartiremos tus datos.</div>
-                <button onClick={formSubmit} type="submit" className="btn btn-primary">Enviar</button>
+                <button onClick={formSubmit} type="submit"  className="btn btn-primary">Enviar</button>
 
             </form>
         </div>

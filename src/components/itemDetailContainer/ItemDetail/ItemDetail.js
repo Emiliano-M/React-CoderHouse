@@ -7,7 +7,14 @@ import CartContext from "../../../Context/CartContext";
 const Detail = ({Data}) =>
 {
     const [itemCountFlag, setTemp] = useState(0)
-    const { addItem } = useContext(CartContext)
+    const { addItem, getQuantitybyId } = useContext(CartContext)
+
+    const cartQuantity = getQuantitybyId(Data.id)
+
+    if(cartQuantity)
+    {
+        Data.stock = Data.stock - cartQuantity
+    }
 
     const onAdd = (value) => {
         setTemp(value);

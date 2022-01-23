@@ -4,7 +4,6 @@ import React, {useState} from 'react';
 const ItemCount = (props) => {
 
     const [count, setcount] = useState(props.initial);
-    
 
     const handleClickp = () => {
         if(count < props.stock)
@@ -23,9 +22,10 @@ const ItemCount = (props) => {
     const onAdd = () => {
         props.onAdd(count)
     }
-    return (
+    return props.stock !== 0 ? (
 
         <div>
+            
             <div className="my-4">
                 <button onClick={handleClickl} type="button" className="btn btn-secondary"> - </button>
                 <span> {count} </span> 
@@ -36,6 +36,14 @@ const ItemCount = (props) => {
                      
         </div>
         
+    )
+    :
+    (
+        <div>
+            
+            <button type="button" className="btn btn-secondary btn-lg" disabled> NO HAY MAS STOCK </button>
+                     
+        </div>
     )
 
 }
